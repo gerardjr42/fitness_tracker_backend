@@ -2,6 +2,9 @@ const express = require("express");
 
 const app = express();
 
+//Middleware
+app.use(express.json());
+
 //HEALTH CHECK
 app.get("/", (req, res) => {
   res.send("Welcome to my fitness app!")

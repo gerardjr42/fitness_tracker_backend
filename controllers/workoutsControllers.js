@@ -22,6 +22,14 @@ router.get("/:id", (req, res) => {
   }
 });
 
+//Create a new workout
+router.post("/", (req, res) => {
+  const currentWorkout = {id: workoutArray.length + 1, ...req.body};
+  workoutArray.push(currentWorkout)
+  //Use status 201 to represent created
+  res.status(201).send(workoutArray[workoutArray.length - 1]);
+})
+
 //exporting this module
 module.exports = router;
 

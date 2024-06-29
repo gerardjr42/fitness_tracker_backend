@@ -30,6 +30,21 @@ router.post("/", (req, res) => {
   res.status(201).send(workoutArray[workoutArray.length - 1]);
 })
 
+//Delete a workout
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+  const deleteWorkoutIndex = workoutArray.findIndex(workout => workout.id === +id);
+
+  //Meeaning if we found an id, we want to delete by splicing it, deleting it.
+  if(deleteWorkoutIndex !== -1) {
+    workoutArray.splice(deleteWorkoutIndex, 1);
+    //after deleting we want to get redirected to remaining workouts path which is /workouts
+    res.redirect("/workouts");
+  } else {
+    res.status(404).json({error: `Workout with id: ${id} not found!`});
+  }
+});
+
 //exporting this module
 module.exports = router;
 

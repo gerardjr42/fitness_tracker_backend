@@ -45,6 +45,19 @@ router.delete("/:id", (req, res) => {
   }
 });
 
+//Update workout
+router.put("/:id", (req, res) => {
+  const { id } = req.params;
+  const workoutToUpdateIndex = workoutArray.findIndex(workout => workout.id === Number(id));
+
+  if(workoutToUpdateIndex !== -1) {
+  workoutArray[workoutToUpdateIndex] = req.body
+    req.status(200).json(workoutArray[workoutToUpdateIndex]);
+  } else {
+    res.status(404).json({error: `Workout with id: ${id} not found!`});
+  }
+})
+
 //exporting this module
 module.exports = router;
 
